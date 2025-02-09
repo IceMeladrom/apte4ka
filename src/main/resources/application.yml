@@ -1,0 +1,28 @@
+server:
+  port: 7777
+#  error:
+#    path: /error
+
+spring:
+  application:
+    name: "apte4ka"
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/apte4ka
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
+#  resources:
+#    static-locations: file:uploads/img/
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        web: TRACE
+#      hibernate: TRACE
