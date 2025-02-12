@@ -2,11 +2,14 @@
 <html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Apte4ka</title>
+    <!-- Подключение Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Подключение AOS для анимаций при прокрутке -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <!-- Подключение общего файла стилей -->
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -25,26 +28,34 @@
         <span th:text="'Возникла ошибка: ' + ${error}" class="error-message"></span>
     </div>
     <div th:if="${isItemAddedToCart != null}">
-        <span th:text="${isItemAddedToCart}
+      <span th:text="${isItemAddedToCart}
         ? 'Товар успешно добавлен в корзину'
         : 'Товар не добавлен в корзину'"
-              class="cart-status" th:classappend="${isItemAddedToCart} ? ' success' : ' error'"></span>
+            class="cart-status" th:classappend="${isItemAddedToCart} ? ' success' : ' error'"></span>
     </div>
-    <div th:each="item: ${items}" class="item-card">
-        <img th:src="@{{pathToImage}(pathToImage=${item.pathToImage})}"
-             src="/img/default-item.png"
-             alt="Фотография товара" class="item-image">
-        <h4 th:text="${item.name}" class="item-name">Название</h4>
-        <div class="item-price">
-            <span th:text="${item.price} + ' ₽'">Цена, ₽</span>
+    <!-- Обёртка для продуктовой сетки -->
+    <div class="product-grid">
+        <div th:each="item: ${items}" class="item-card" data-aos="fade-up">
+            <img th:src="@{{pathToImage}(pathToImage=${item.pathToImage})}"
+                 src="/img/default-item.png"
+                 alt="Фотография товара" class="item-image">
+            <h4 th:text="${item.name}" class="item-name">Название</h4>
+            <div class="item-price">
+                <span th:text="${item.price} + ' ₽'">Цена, ₽</span>
+            </div>
+            <div class="item-quantity">
+          <span th:text="${item.quantity > 0 ? 'В наличии ' + item.quantity + ' шт.' : 'Товар временно отсутствует'}">
+            Наличие
+          </span>
+            </div>
+            <a th:if="${item.quantity > 0}" th:href="@{/cart/add/item/{id}(id=${item.id})}" class="add-to-cart-btn">Добавить в корзину</a>
         </div>
-        <div class="item-quantity">
-            <span th:text="${item.quantity > 0 ? 'В наличии ' + item.quantity + ' шт.' : 'Товар временно отсутствует'}">
-                Наличие
-            </span>
-        </div>
-        <a th:if="${item.quantity > 0}" th:href="@{/cart/add/item/{id}(id=${item.id})}" class="add-to-cart-btn">Добавить в корзину</a>
     </div>
 </main>
+<!-- Подключение AOS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 </body>
 </html>

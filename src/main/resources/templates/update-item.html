@@ -2,12 +2,12 @@
 <html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Apte4ka Admin Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 </head>
 <body>
 <header class="site-header">
@@ -21,8 +21,8 @@
 </header>
 <hr class="divider"/>
 <main class="site-main">
-    <ol class="item-list">
-        <li th:each="item : ${items}" class="item-card">
+    <ol class="item-list" data-aos="fade-up">
+        <li th:each="item : ${items}" class="item-card" data-aos="fade-up">
             <img th:src="@{{pathToImage}(pathToImage=${item.pathToImage})}"
                  src="/img/default-item.png"
                  alt="Фотография товара" class="item-image">
@@ -31,5 +31,9 @@
         </li>
     </ol>
 </main>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 </body>
 </html>

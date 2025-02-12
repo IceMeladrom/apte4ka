@@ -2,12 +2,12 @@
 <html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Apte4ka Cart</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 </head>
 <body>
 <header class="site-header">
@@ -21,14 +21,14 @@
 </header>
 <hr class="divider"/>
 <main class="site-main">
-    <div>
+    <div data-aos="fade-right">
         <span th:text="${isItemDeletedFromCart == true} ? 'Товар успешно удален из корзины'" class="status-message" style="color: green;"></span>
     </div>
-    <h2>Ваша корзина</h2>
-    <form action="/cart/purchase" method="post" class="cart-form">
+    <h2 data-aos="fade-right">Ваша корзина</h2>
+    <form action="/cart/purchase" method="post" class="cart-form" data-aos="fade-up">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <ol class="cart-list">
-            <li th:each="item : ${cart}" class="cart-item">
+            <li th:each="item : ${cart}" class="cart-item" data-aos="fade-up">
                 <img th:src="@{{pathToImage}(pathToImage=${item.pathToImage})}"
                      src="/img/default-item.png"
                      alt="Фотография товара" class="item-image">
@@ -39,12 +39,16 @@
                 <a th:href="@{/cart/delete/item/{itemId}(itemId=${item.id})}" class="delete-item-btn">Удалить товар из корзины</a>
             </li>
         </ol>
-        <div>
+        <div data-aos="fade-up">
             <span th:text="'Общая стоимость ' + ${totalCost} + ' ₽'"></span>
         </div>
         <input type="submit" value="Оформить заказ" class="submit-btn">
     </form>
-    <a href="/cart/clear" class="clear-cart-btn">Очистить всю корзину</a>
+    <a href="/cart/clear" class="clear-cart-btn" data-aos="fade-up">Очистить всю корзину</a>
 </main>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 </body>
 </html>

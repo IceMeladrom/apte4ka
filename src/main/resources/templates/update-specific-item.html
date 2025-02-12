@@ -2,12 +2,12 @@
 <html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Apte4ka Admin Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 </head>
 <body>
 <header class="site-header">
@@ -21,7 +21,7 @@
 </header>
 <hr class="divider"/>
 <main class="site-main">
-    <form th:action="@{/admin/items/update/{itemId}(itemId=${item.id})}" method="post" enctype="multipart/form-data" class="item-form">
+    <form th:action="@{/admin/items/update/{itemId}(itemId=${item.id})}" method="post" enctype="multipart/form-data" class="item-form" data-aos="fade-up">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <div class="form-group">
             <label>
@@ -53,5 +53,9 @@
         <input type="submit" value="Редактировать" class="submit-btn">
     </form>
 </main>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 </body>
 </html>

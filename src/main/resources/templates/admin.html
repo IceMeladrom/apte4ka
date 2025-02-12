@@ -2,12 +2,12 @@
 <html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Apte4ka Admin Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 </head>
 <body>
 <header class="site-header">
@@ -21,49 +21,53 @@
 </header>
 <hr class="divider"/>
 <main class="site-main">
-    <div>
+    <div data-aos="fade-right">
         <span th:text="${isItemCreated == true} ? 'Новый товар успешно добавлен'" class="status-message" style="color: green;"></span>
     </div>
-    <div>
+    <div data-aos="fade-right">
         <span th:text="${isItemEdited == true} ? 'Товар успешно отредактирован'" class="status-message" style="color: green;"></span>
     </div>
-    <nav class="admin-actions">
+    <nav class="admin-actions" data-aos="fade-up">
         <a href="/admin/items/create" class="admin-btn">Добавить новый товар</a>
         <a href="/admin/items/update" class="admin-btn">Редактировать товар</a>
     </nav>
-    <div class="statistics">
+    <div class="statistics" data-aos="fade-up">
         <h3>Статистика</h3>
         <div class="stat-item">
-            <span th:text="${topSellingItem != null}
+        <span th:text="${topSellingItem != null}
             ? 'Самый продаваемый товар: ' + ${topSellingItem.item.name} + ', ' + ${topSellingItem.amount} + ' шт.'
             : 'Самый продаваемый товар: пока нет'"></span>
         </div>
         <div class="stat-item">
-            <span th:text="${worstSellingItem != null}
+        <span th:text="${worstSellingItem != null}
             ? 'Самый непродаваемый товар: ' + ${worstSellingItem.item.name} + ', ' + ${worstSellingItem.amount} + ' шт.'
             : 'Самый непродаваемый товар: пока нет'"></span>
         </div>
         <div class="stat-item">
-            <span th:text="${theMostExpensiveItem != null} ? 'Самый дорогой товар: ' +
+        <span th:text="${theMostExpensiveItem != null} ? 'Самый дорогой товар: ' +
             ${theMostExpensiveItem.name} + ', ' + ${theMostExpensiveItem.price} + ' ₽'
             : 'Самый дорогой товар: пока нет'"></span>
         </div>
         <div class="stat-item">
-            <span th:text="${theMostCheapestItem != null} ? 'Самый дешевый товар: ' +
+        <span th:text="${theMostCheapestItem != null} ? 'Самый дешевый товар: ' +
             ${theMostCheapestItem.name} + ', ' + ${theMostCheapestItem.price} + ' ₽'
             : 'Самый дешевый товар: пока нет'"></span>
         </div>
         <div class="stat-item">
-            <span th:text="${theLargestQuantityOfItems != null} ? 'Наибольшее количество товара: ' +
+        <span th:text="${theLargestQuantityOfItems != null} ? 'Наибольшее количество товара: ' +
             ${theLargestQuantityOfItems.name} + ', ' + ${theMostExpensiveItem.quantity} + ' шт.'
             : 'Наибольшее количество товара: пока нет'"></span>
         </div>
         <div class="stat-item">
-            <span th:text="${theSmallestQuantityOfItems != null} ? 'Наименьшее количество товара: ' +
+        <span th:text="${theSmallestQuantityOfItems != null} ? 'Наименьшее количество товара: ' +
             ${theSmallestQuantityOfItems.name} + ', ' + ${theMostCheapestItem.quantity} + ' шт.'
             : 'Наименьшее количество товара: пока нет'"></span>
         </div>
     </div>
 </main>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 </body>
 </html>
