@@ -54,12 +54,12 @@
         </div>
         <div class="stat-item">
         <span th:text="${theLargestQuantityOfItems != null} ? 'Наибольшее количество товара: ' +
-            ${theLargestQuantityOfItems.name} + ', ' + ${theMostExpensiveItem.quantity} + ' шт.'
+            ${theLargestQuantityOfItems.name} + ', ' + ${theLargestQuantityOfItems.quantity} + ' шт.'
             : 'Наибольшее количество товара: пока нет'"></span>
         </div>
         <div class="stat-item">
         <span th:text="${theSmallestQuantityOfItems != null} ? 'Наименьшее количество товара: ' +
-            ${theSmallestQuantityOfItems.name} + ', ' + ${theMostCheapestItem.quantity} + ' шт.'
+            ${theSmallestQuantityOfItems.name} + ', ' + ${theSmallestQuantityOfItems.quantity} + ' шт.'
             : 'Наименьшее количество товара: пока нет'"></span>
         </div>
     </div>
