@@ -1,21 +1,50 @@
-<!DOCTYPE html>
-<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <meta lang="ru">
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Apte4ka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-
-<div class="container">
-    <header></header>
-    <main>
-        <h1>Hello, World!</h1>
-    </main>
-    <footer></footer>
-</div>
-
+<header class="site-header">
+    <h1 class="site-logo"><a href="/" class="logo-link">Apte4ka</a></h1>
+    <nav class="site-nav">
+        <a sec:authorize="isAnonymous()" href="/login" class="nav-link">Войти</a>
+        <a sec:authorize="isAuthenticated()" href="/logout" class="nav-link">Выйти</a>
+        <a sec:authorize="isAuthenticated()" href="/admin" class="nav-link">Панель администратора</a>
+        <a href="/cart" class="nav-link">Корзина</a>
+    </nav>
+</header>
+<hr class="divider"/>
+<main class="site-main">
+    <div th:if="${error}">
+        <span th:text="'Возникла ошибка: ' + ${error}" class="error-message"></span>
+    </div>
+    <div th:if="${isItemAddedToCart != null}">
+        <span th:text="${isItemAddedToCart}
+        ? 'Товар успешно добавлен в корзину'
+        : 'Товар не добавлен в корзину'"
+              class="cart-status" th:classappend="${isItemAddedToCart} ? ' success' : ' error'"></span>
+    </div>
+    <div th:each="item: ${items}" class="item-card">
+        <img th:src="@{{pathToImage}(pathToImage=${item.pathToImage})}"
+             src="/img/default-item.png"
+             alt="Фотография товара" class="item-image">
+        <h4 th:text="${item.name}" class="item-name">Название</h4>
+        <div class="item-price">
+            <span th:text="${item.price} + ' ₽'">Цена, ₽</span>
+        </div>
+        <div class="item-quantity">
+            <span th:text="${item.quantity > 0 ? 'В наличии ' + item.quantity + ' шт.' : 'Товар временно отсутствует'}">
+                Наличие
+            </span>
+        </div>
+        <a th:if="${item.quantity > 0}" th:href="@{/cart/add/item/{id}(id=${item.id})}" class="add-to-cart-btn">Добавить в корзину</a>
+    </div>
+</main>
 </body>
 </html>

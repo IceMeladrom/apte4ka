@@ -1,4 +1,4 @@
-package ru.bmstu.apte4ka;
+package ru.bmstu.my_apte4ka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,19 +1,19 @@
 server:
-  port: 7777
+  port: 22222
 #  error:
 #    path: /error
 
 spring:
   application:
-    name: "apte4ka"
+    name: "my_apte4ka"
   jpa:
     database: POSTGRESQL
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
   datasource:
     platform: postgres
-    url: jdbc:postgresql://localhost:5432/apte4ka
+    url: jdbc:postgresql://localhost:5432/my_apte4ka
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver
